@@ -35,16 +35,16 @@ app.get("/video", (req, res) => {
         {
             host: VIDEO_STORAGE_HOST,
             port: VIDEO_STORAGE_PORT,
-            path: '/video?path=SampleVideo_1280x720_1mb.mp4', // Video path is hard-coded for the moment.
+            path: '/video?path=sample_video.mp4', // Video path is hard-coded for the moment.
             method: 'GET',
             headers: req.headers
-        }, 
+        },
         forwardResponse => {
             res.writeHeader(forwardResponse.statusCode, forwardResponse.headers);
             forwardResponse.pipe(res);
         }
     );
-    
+
     req.pipe(forwardRequest);
 });
 

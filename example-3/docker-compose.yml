@@ -8,18 +8,19 @@ services:
      - "4000:27017"
     restart: always
 
-  azure-storage:
-    image: azure-storage
+  aws-storage:
+    image: aws-storage
     build: 
-      context: ./azure-storage
+      context: ./aws-storage
       dockerfile: Dockerfile
     container_name: video-storage
     ports:
-     - "4001:80"
+     - "4000:80"
     environment:
       - PORT=80
-      - STORAGE_ACCOUNT_NAME=${STORAGE_ACCOUNT_NAME}
-      - STORAGE_ACCESS_KEY=${STORAGE_ACCESS_KEY}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_BUCKET=${AWS_BUCKET}
     restart: "no"
 
   video-streaming:
